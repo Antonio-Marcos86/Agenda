@@ -1,13 +1,18 @@
 package com.antonio.agenda.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.antonio.agenda.R;
 import com.antonio.agenda.dao.AlunoDAO;
 import com.antonio.agenda.model.Aluno;
+
+import java.io.Serializable;
 
 public class FormularioAlunoActivity extends AppCompatActivity {
 
@@ -24,6 +29,12 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
         inicializaComponentes();
         ConfiguraBotaoSalvar();
+
+        Intent dados = getIntent();
+        Aluno aluno = (Aluno) dados.getSerializableExtra("aluno");
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
     }
 
     private void ConfiguraBotaoSalvar() {
@@ -31,11 +42,31 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            String nome=campoNome.getText().toString();
+            String telefone=campoTelefone.getText().toString();
+            String email=campoEmail.getText().toString();
+            if(!nome.isEmpty()){
+                if(!telefone.isEmpty()){
+                    if(!email.isEmpty()){
+                        Aluno aluno = criaAluno();
+                        salvaAluno(aluno, dao);
+                    }else{
+                        message("Digite o email do Aluno");
+                    }
+                }else{
+                    message("Digite o Telefone");
+                }
 
-                Aluno aluno = criaAluno();
-                salvaAluno(aluno, dao);
+            }else{
+                message("digite o nome do Aluno");
             }
+         }
         });
+    }
+
+    private void message(String texto) {
+        Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
+
     }
 
     private void inicializaComponentes() {
