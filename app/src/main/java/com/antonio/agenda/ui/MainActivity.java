@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.antonio.agenda.R;
 import com.antonio.agenda.dao.AlunoDAO;
 import com.antonio.agenda.model.Aluno;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -21,12 +22,22 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TITULO_APPBAR = "Lista de Alunos";
     private final AlunoDAO dao = new AlunoDAO();
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(TITULO_APPBAR);
+
+        fab= findViewById(R.id.activity_main_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FormularioAlunoActivity.class));
+            }
+        });
+
         dao.salvar(new Aluno("Antonio","45454545","@gmail"));
         dao.salvar(new Aluno("Ana Paula","5555555","@gmail"));
         dao.salvar(new Aluno("Iuri","7777777","@gmail"));
@@ -51,12 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent editarAluno = new Intent(MainActivity.this, FormularioAlunoActivity.class);
                 editarAluno.putExtra("aluno",alunoEscolhido);
                 startActivity(editarAluno);
+
             }
         });
     }
 
-    public void abrirFormulario(View view){
-        startActivity(new Intent(this, FormularioAlunoActivity.class));
 
-    }
 }
