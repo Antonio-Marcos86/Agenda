@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,9 +12,13 @@ import com.antonio.agenda.R;
 import com.antonio.agenda.dao.AlunoDAO;
 import com.antonio.agenda.model.Aluno;
 
+import static com.antonio.agenda.ui.ConstantesActivities.CHAVE_ALUNO;
+import static com.antonio.agenda.ui.ConstantesActivities.TITULO_APPBAR_EDITA_ALUNO;
+import static com.antonio.agenda.ui.ConstantesActivities.TITULO_APPBAR_FORMULARIO;
+
+
 public class FormularioAlunoActivity extends AppCompatActivity {
 
-    public static final String TITULO_APPBAR = "Novo aluno";
     private EditText campoNome, campoTelefone, campoEmail;
     final AlunoDAO dao = new AlunoDAO();
     private Button botaoSalvar;
@@ -26,21 +29,28 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
-        setTitle(TITULO_APPBAR);
+        setTitle(TITULO_APPBAR_FORMULARIO);
 
         inicializaComponentes();
         ConfiguraBotaoSalvar();
+        carregaDadosAluno();
+    }
 
+    private void carregaDadosAluno() {
         Intent dados = getIntent();
-        if(dados.hasExtra("aluno")){
-            aluno = (Aluno) dados.getSerializableExtra("aluno");
-            campoNome.setText(aluno.getNome());
-            campoTelefone.setText(aluno.getTelefone());
-            campoEmail.setText(aluno.getEmail());
-            setTitle("Editar Aluno");
+        if(dados.hasExtra(CHAVE_ALUNO)){
+            aluno = (Aluno) dados.getSerializableExtra(CHAVE_ALUNO);
+            preencheCampos();
+            setTitle(TITULO_APPBAR_EDITA_ALUNO);
         } else{
             aluno= new Aluno();
         }
+    }
+
+    private void preencheCampos() {
+        campoNome.setText(aluno.getNome());
+        campoTelefone.setText(aluno.getTelefone());
+        campoEmail.setText(aluno.getEmail());
     }
 
     private void ConfiguraBotaoSalvar() {
@@ -48,21 +58,19 @@ public class FormularioAlunoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                preencheAluno();
-                if(aluno.temIdValido()){
-                    dao.edita(aluno);
-                }else{
-                    dao.salvar(aluno);
-                }
-
-                finish();
+                finalizaFormulario();
             }
         });
     }
 
-    private void message(String texto) {
-        Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
-
+    private void finalizaFormulario() {
+        preencheAluno();
+        if(aluno.temIdValido()){
+            dao.edita(aluno);
+        }else{
+            dao.salvar(aluno);
+        }
+        finish();
     }
 
     private void inicializaComponentes() {

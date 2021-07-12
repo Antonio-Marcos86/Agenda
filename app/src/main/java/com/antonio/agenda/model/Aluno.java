@@ -43,9 +43,6 @@ public class Aluno implements Serializable {
         this.id = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
