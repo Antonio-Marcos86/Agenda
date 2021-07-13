@@ -1,8 +1,6 @@
 package com.antonio.agenda.ui;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -11,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,7 +23,6 @@ import static com.antonio.agenda.ui.ConstantesActivities.TITULO_APPBAR_MAIN;
 public class MainActivity extends AppCompatActivity {
 
     private final AlunoDAO dao = new AlunoDAO();
-    private FloatingActionButton fab;
     private listaAlunosAdapter adapter;
 
 
@@ -60,27 +56,18 @@ public class MainActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle("Removendo Aluno")
                 .setMessage("Tem certeza que deseja remover o aluno?")
-                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AdapterView.AdapterContextMenuInfo menuInfo =
-                                (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                        Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
-                        removeAluno(alunoEscolhido);
-                    }
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    AdapterView.AdapterContextMenuInfo menuInfo =
+                            (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                    Aluno alunoEscolhido = adapter.getItem(menuInfo.position);
+                    removeAluno(alunoEscolhido);
                 })
                 .setNegativeButton("Não",null).show();
     }
 
     private void chamaOclickFab() {
-        fab = findViewById(R.id.activity_main_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FormularioAlunoActivity.class));
-
-            }
-        });
+        FloatingActionButton fab = findViewById(R.id.activity_main_fab);
+        fab.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FormularioAlunoActivity.class)));
     }
 
     @Override
@@ -109,12 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void configuraListenerDeCliquePorItem(ListView listaDeAlunos) {
-        listaDeAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
-                abreFormularioModoEditaAluno(alunoEscolhido);
-            }
+        listaDeAlunos.setOnItemClickListener((adapterView, view, posicao, id) -> {
+            Aluno alunoEscolhido = (Aluno) adapterView.getItemAtPosition(posicao);
+            abreFormularioModoEditaAluno(alunoEscolhido);
         });
     }
 

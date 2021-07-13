@@ -2,7 +2,6 @@ package com.antonio.agenda.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -54,13 +53,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
     }
 
     private void ConfiguraBotaoSalvar() {
-        botaoSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                finalizaFormulario();
-            }
-        });
+        botaoSalvar.setOnClickListener(v -> finalizaFormulario());
     }
 
     private void finalizaFormulario() {

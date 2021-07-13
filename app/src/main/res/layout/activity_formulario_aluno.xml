@@ -16,7 +16,7 @@
             android:layout_margin="8dp"
             android:hint="@string/nome"
             android:inputType="textCapWords"
-            android:paddingStart="8dp" />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/activity_formulario_editPhone"
@@ -25,7 +25,7 @@
             android:layout_margin="8dp"
             android:hint="@string/telefone"
             android:inputType="phone"
-            android:paddingStart="8dp" />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/activity_formulario_editEmail"
@@ -34,7 +34,7 @@
             android:layout_margin="8dp"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:paddingStart="8dp" />
+            android:autofillHints="" />
 
 
         <Button
