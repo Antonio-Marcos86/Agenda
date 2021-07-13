@@ -41,7 +41,6 @@ public class listaAlunosAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View viewCriada = criaView(parent);
-
         Aluno alunoDevolvido = alunos.get(position);
         vinculaDados(viewCriada, alunoDevolvido);
         return viewCriada;

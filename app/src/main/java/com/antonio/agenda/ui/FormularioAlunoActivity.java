@@ -32,7 +32,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         setTitle(TITULO_APPBAR_FORMULARIO);
 
         inicializaComponentes();
-        ConfiguraBotaoSalvar();
+       ConfiguraBotaoSalvar();
         carregaDadosAluno();
     }
 
@@ -85,7 +85,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         String telefone = campoTelefone.getText().toString();
         String email = campoEmail.getText().toString();
 
-        aluno.getNome(nome);
+        aluno.setNome(nome);
         aluno.setTelefone(telefone);
         aluno.setEmail(email);
 

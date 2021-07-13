@@ -14,27 +14,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Nome"
+            android:hint="@string/nome"
             android:inputType="textCapWords"
-            android:paddingLeft="8dp" />
+            android:paddingStart="8dp" />
 
         <EditText
             android:id="@+id/activity_formulario_editPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Telefone"
+            android:hint="@string/telefone"
             android:inputType="phone"
-            android:paddingLeft="8dp" />
+            android:paddingStart="8dp" />
 
         <EditText
             android:id="@+id/activity_formulario_editEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:paddingLeft="8dp" />
+            android:paddingStart="8dp" />
 
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Salvar" />
+            android:text="@string/salvar" />
 
     </LinearLayout>
 
