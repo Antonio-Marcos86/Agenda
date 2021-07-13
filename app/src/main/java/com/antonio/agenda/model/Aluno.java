@@ -25,18 +25,18 @@ public class Aluno implements Serializable {
     public String getNome() {
         return this.nome;
     }
+    @NonNull
+    @Override
+    public String toString() {
+        return nome ;
+    }
 
     public String getTelefone() {
         return telefone;
     }
-    @NonNull
-    @Override
-    public String toString() {
-        return nome;
-    }
 
     public String getEmail() {
-        return email;
+        return email ;
     }
 
     public void setId(int id) {
