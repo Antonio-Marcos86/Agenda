@@ -6,12 +6,10 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
 import com.antonio.agenda.R;
-import com.antonio.agenda.dao.AlunoDAO;
 import com.antonio.agenda.database.AgendaDatabase;
-import com.antonio.agenda.database.dao.RoomAlunoDao;
+import com.antonio.agenda.database.dao.AlunoDAO;
 import com.antonio.agenda.model.Aluno;
 
 import static com.antonio.agenda.ui.ConstantesActivities.CHAVE_ALUNO;
@@ -22,7 +20,7 @@ import static com.antonio.agenda.ui.ConstantesActivities.TITULO_APPBAR_FORMULARI
 public class FormularioAlunoActivity extends AppCompatActivity {
 
     private EditText campoNome, campoTelefone, campoEmail;
-    private RoomAlunoDao dao;
+    private AlunoDAO dao;
     private Button botaoSalvar;
     private Aluno aluno;
 
@@ -32,7 +30,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
         setTitle(TITULO_APPBAR_FORMULARIO);
-        AgendaDatabase database = Room.databaseBuilder(this, AgendaDatabase.class, "agenda.db").allowMainThreadQueries().build();
+        AgendaDatabase database = AgendaDatabase.getInstance(this);
         dao = database.getRoomAlunoDao();
         inicializaComponentes();
         ConfiguraBotaoSalvar();

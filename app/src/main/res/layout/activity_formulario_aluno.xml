@@ -36,7 +36,6 @@
             android:inputType="textEmailAddress"
             android:autofillHints="" />
 
-
         <Button
             android:id="@+id/activity_formulario_ButtonSalvar"
             android:layout_width="match_parent"

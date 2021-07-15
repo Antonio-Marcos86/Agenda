@@ -11,7 +11,7 @@ import com.antonio.agenda.model.Aluno;
 import java.util.List;
 
 @Dao
-public interface RoomAlunoDao {
+public interface AlunoDAO {
 
     @Insert
     void salva(Aluno aluno);
