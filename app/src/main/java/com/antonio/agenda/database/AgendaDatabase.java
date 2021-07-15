@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.antonio.agenda.database.dao.AlunoDAO;
 import com.antonio.agenda.model.Aluno;
 
-@Database(entities = {Aluno.class},version = 1, exportSchema = false)
+@Database(entities = {Aluno.class},version = 2, exportSchema = false)
 public abstract class AgendaDatabase extends RoomDatabase {
 
     private static final String NOME_BANCO_DE_DADOS = "agenda.db";
@@ -20,15 +20,17 @@ public abstract class AgendaDatabase extends RoomDatabase {
     public abstract AlunoDAO getRoomAlunoDao();
 
     public static AgendaDatabase getInstance(Context context){
-        return
-        Room.databaseBuilder(context, AgendaDatabase.class, NOME_BANCO_DE_DADOS).allowMainThreadQueries().build();
-
-    Room.databaseBuilder(context, AgendaDatabase.class, NOME_BANCO_DE_DADOS).allowMainThreadQueries().addMigrations(new Migration(1,2) {
-            @Override
-            public void migrate(@NonNull @org.jetbrains.annotations.NotNull SupportSQLiteDatabase database) {
-
-            }
-        }).build();
+        return Room
+                .databaseBuilder(context, AgendaDatabase.class, NOME_BANCO_DE_DADOS).allowMainThreadQueries().build();
+//    Para atualizar banco de dados
+//    Room.databaseBuilder(context, AgendaDatabase.class, NOME_BANCO_DE_DADOS)
+//            .allowMainThreadQueries()
+//            .addMigrations(new Migration(1,2) {
+//            @Override
+//            public void migrate(@NonNull @org.jetbrains.annotations.NotNull SupportSQLiteDatabase database) {
+//                database.execSQL("ALTER TABLE aluno ADD COLUMN sobrenome TEXT");
+//            }
+//        }).build();
     }
 
 }

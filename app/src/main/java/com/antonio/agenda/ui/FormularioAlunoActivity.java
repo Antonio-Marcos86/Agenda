@@ -19,7 +19,7 @@ import static com.antonio.agenda.ui.ConstantesActivities.TITULO_APPBAR_FORMULARI
 
 public class FormularioAlunoActivity extends AppCompatActivity {
 
-    private EditText campoNome, campoTelefone, campoEmail;
+    private EditText campoNome,campoSobrenome, campoTelefone, campoEmail;
     private AlunoDAO dao;
     private Button botaoSalvar;
     private Aluno aluno;
@@ -50,6 +50,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void preencheCampos() {
         campoNome.setText(aluno.getNome());
+        campoSobrenome.setText(aluno.getSobrenome());
         campoTelefone.setText(aluno.getTelefone());
         campoEmail.setText(aluno.getEmail());
     }
@@ -70,6 +71,7 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void inicializaComponentes() {
         campoNome = findViewById(R.id.activiity_formulario_editName);
+        campoSobrenome = findViewById(R.id.activiity_formulario_editLastName);
         campoTelefone = findViewById(R.id.activity_formulario_editPhone);
         campoEmail = findViewById(R.id.activity_formulario_editEmail);
         botaoSalvar = findViewById(R.id.activity_formulario_ButtonSalvar);
@@ -77,10 +79,12 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void preencheAluno() {
         String nome = campoNome.getText().toString();
+        String sobrenome = campoSobrenome.getText().toString();
         String telefone = campoTelefone.getText().toString();
         String email = campoEmail.getText().toString();
 
         aluno.setNome(nome);
+        aluno.setSobrenome(sobrenome);
         aluno.setTelefone(telefone);
         aluno.setEmail(email);
 
