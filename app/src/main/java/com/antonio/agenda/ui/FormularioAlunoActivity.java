@@ -6,9 +6,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import com.antonio.agenda.R;
 import com.antonio.agenda.dao.AlunoDAO;
+import com.antonio.agenda.database.AgendaDatabase;
+import com.antonio.agenda.database.dao.RoomAlunoDao;
 import com.antonio.agenda.model.Aluno;
 
 import static com.antonio.agenda.ui.ConstantesActivities.CHAVE_ALUNO;
@@ -19,7 +22,7 @@ import static com.antonio.agenda.ui.ConstantesActivities.TITULO_APPBAR_FORMULARI
 public class FormularioAlunoActivity extends AppCompatActivity {
 
     private EditText campoNome, campoTelefone, campoEmail;
-    final AlunoDAO dao = new AlunoDAO();
+    private RoomAlunoDao dao;
     private Button botaoSalvar;
     private Aluno aluno;
 
@@ -29,20 +32,21 @@ public class FormularioAlunoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_aluno);
         setTitle(TITULO_APPBAR_FORMULARIO);
-
+        AgendaDatabase database = Room.databaseBuilder(this, AgendaDatabase.class, "agenda.db").allowMainThreadQueries().build();
+        dao = database.getRoomAlunoDao();
         inicializaComponentes();
-       ConfiguraBotaoSalvar();
+        ConfiguraBotaoSalvar();
         carregaDadosAluno();
     }
 
     private void carregaDadosAluno() {
         Intent dados = getIntent();
-        if(dados.hasExtra(CHAVE_ALUNO)){
+        if (dados.hasExtra(CHAVE_ALUNO)) {
             aluno = (Aluno) dados.getSerializableExtra(CHAVE_ALUNO);
             preencheCampos();
             setTitle(TITULO_APPBAR_EDITA_ALUNO);
-        } else{
-            aluno= new Aluno();
+        } else {
+            aluno = new Aluno();
         }
     }
 
@@ -58,10 +62,10 @@ public class FormularioAlunoActivity extends AppCompatActivity {
 
     private void finalizaFormulario() {
         preencheAluno();
-        if(aluno.temIdValido()){
+        if (aluno.temIdValido()) {
             dao.edita(aluno);
-        }else{
-            dao.salvar(aluno);
+        } else {
+            dao.salva(aluno);
         }
         finish();
     }

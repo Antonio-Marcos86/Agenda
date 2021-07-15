@@ -13,12 +13,12 @@ import com.antonio.agenda.model.Aluno;
 import java.util.ArrayList;
 import java.util.List;
 
-public class listaAlunosAdapter extends BaseAdapter {
+public class ListaAlunosAdapter extends BaseAdapter {
 
     private final List<Aluno> alunos = new ArrayList<>();
     private final Context context;
 
-    public listaAlunosAdapter(Context context) {
+    public ListaAlunosAdapter(Context context) {
         this.context = context;
     }
 
