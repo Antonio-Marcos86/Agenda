@@ -16,7 +16,6 @@ public class Aluno implements Serializable {
 
     private  String nome;
     private  String sobrenome;
-
     private  String telefone;
     private  String email;
 
